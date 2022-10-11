@@ -1,0 +1,319 @@
+{
+	"info": {
+		"_postman_id": "3f6d70e0-e100-4d3f-8f53-0f7211b47011",
+		"name": "DeckOfCards",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13691434"
+	},
+	"item": [
+		{
+			"name": "Shuffle",
+			"item": [
+				{
+					"name": "ShuffleDeck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var deck_id = jsonData['deck_id'];\r",
+									"pm.globals.set(\"deck_id\", jsonData.deck_id);\r",
+									"/*\r",
+									"Test scenarios:\r",
+									"Verify user can shuffle deck with deck_count = 1\r",
+									"\r",
+									"Verify user can shuffle deck with max deck_count = 20\r",
+									"\r",
+									"Verify user is unable to shuffle deck with deck_count = 21\r",
+									"\r",
+									"Verify user is unable to shuffle deck with deck_count = 0\r",
+									"*/\r",
+									"\r",
+									"pm.test(\"Verify user can shuffle deck with deck_count = 1\", () => {\r",
+									"    pm.sendRequest(\"https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1\");\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=21",
+							"protocol": "https",
+							"host": [
+								"deckofcardsapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"deck",
+								"new",
+								"shuffle",
+								""
+							],
+							"query": [
+								{
+									"key": "deck_count",
+									"value": "21"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Draw cards",
+			"item": [
+				{
+					"name": "Draw cards using a new deck",
+					"item": [
+						{
+							"name": "Draw 1 Card",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://deckofcardsapi.com/api/deck/new/draw/?count=1",
+									"protocol": "https",
+									"host": [
+										"deckofcardsapi",
+										"com"
+									],
+									"path": [
+										"api",
+										"deck",
+										"new",
+										"draw",
+										""
+									],
+									"query": [
+										{
+											"key": "count",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Draw 1 Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://deckofcardsapi.com/api/deck/{{deck_id}}/draw/?count=1",
+							"protocol": "https",
+							"host": [
+								"deckofcardsapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"deck",
+								"{{deck_id}}",
+								"draw",
+								""
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Draw 2 cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://deckofcardsapi.com/api/deck/{{deck_id}}/draw/?count=2",
+							"protocol": "https",
+							"host": [
+								"deckofcardsapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"deck",
+								"{{deck_id}}",
+								"draw",
+								""
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reshuffle",
+			"item": [
+				{
+					"name": "Reshuffle all cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://deckofcardsapi.com/api/deck/{{deck_id}}/shuffle/",
+							"protocol": "https",
+							"host": [
+								"deckofcardsapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"deck",
+								"{{deck_id}}",
+								"shuffle",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reshuffle remaining cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://deckofcardsapi.com/api/deck/{{deck_id}}/shuffle/?remaining=true",
+							"protocol": "https",
+							"host": [
+								"deckofcardsapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"deck",
+								"{{deck_id}}",
+								"shuffle",
+								""
+							],
+							"query": [
+								{
+									"key": "remaining",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Open a brand new deck of cards",
+			"item": [
+				{
+					"name": "Brand new deck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var deck_id = jsonData['deck_id'];\r",
+									"pm.globals.set(\"deck_id\", jsonData.deck_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://deckofcardsapi.com/api/deck/new/",
+							"protocol": "https",
+							"host": [
+								"deckofcardsapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"deck",
+								"new",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brand new deck with jokers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var deck_id = jsonData['deck_id'];\r",
+									"pm.globals.set(\"deck_id\", jsonData.deck_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://deckofcardsapi.com/api/deck/new/?jokers_enabled=true",
+							"protocol": "https",
+							"host": [
+								"deckofcardsapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"deck",
+								"new",
+								""
+							],
+							"query": [
+								{
+									"key": "jokers_enabled",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
